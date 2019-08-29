@@ -1,24 +1,26 @@
-import java.io.BufferedOutputStream;
+
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.nio.charset.Charset;
 
 public class Client {
     
         private Socket socket = null;
         private BufferedReader input = null;
-        private BufferedOutputStream out = null;
+        private DataOutputStream out = null;
 
         public Client(String address, int port){ 
-            System.out.println("Conectado!");
-            System.out.print("Digite uma mensagem: ");
+            
             
             try{
+                Socket socket = new Socket(address, port);
+                System.out.println("Conectado!");
+                System.out.print("Digite uma mensagem: ");
                 input = new BufferedReader(new InputStreamReader(System.in));
-                out = new BufferedOutputStream(socket.getOutputStream());
+                out = new DataOutputStream(socket.getOutputStream());
                 
             }catch(UnknownHostException u){
                 System.out.println(u);
@@ -31,7 +33,7 @@ public class Client {
             while(!line.equals("exit")){
                 try {
                     line = input.readLine();
-                    out.write(line.getBytes(Charset.forName("UTF-8")));
+                    out.writeUTF(line); 
                 }catch(IOException i) {
                     System.out.println(i);
                 }
@@ -47,6 +49,6 @@ public class Client {
             }
         }
     public static void main(String[] args) {
-        Client client = new Client("localhost", 9000);
+        Client client = new Client("127.0.0.1", 9000);
     }
 }

@@ -20,6 +20,7 @@ public class Server {
             System.out.println("Cliente aceito");
             
             in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            System.out.println(in.readUTF());
 
             String line = "";
 
