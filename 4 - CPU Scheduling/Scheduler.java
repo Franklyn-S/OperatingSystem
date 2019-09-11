@@ -1,3 +1,5 @@
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Scheduler {
@@ -8,14 +10,16 @@ public class Scheduler {
         */
 
         int lenght = 5;
-        Object[] readyList = new Object(lenght);
-        int quantum = 100;
-        Random generator =  new Randon();
+        List<Object> readyList = new ArrayList<Object>();
+        
+        Random generator =  new Random();
 
 
         int[] randomTimes = new int[5];
+        int[] quantuns = new int[5];
         for (int i = 0; i < 5; i++){
-            randomTimes[i] = generator.nextInt(10000);
+            randomTimes[i] = generator.nextInt(5001);
+            quantuns[i] = generator.nextInt(501-100) + 100;
         }
 
         Contador t1 =  new Contador(100);
@@ -23,6 +27,7 @@ public class Scheduler {
         Contador t3 =  new Contador(300);
         Contador t4 =  new Contador(400);
         Contador t5 =  new Contador(500);
+
 
         Thread[] threads = {t1, t2, t3, t4, t5};
 
