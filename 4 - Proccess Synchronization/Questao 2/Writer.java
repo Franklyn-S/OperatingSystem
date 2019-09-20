@@ -11,10 +11,12 @@ public class Writer implements Runnable {
             SleepUtilities.nap();
 
             db.acquireWriteLock();
+            System.out.println("Escrevendo " + Thread.currentThread().getName());
             //você tem acesso para ler do banco de dados
             SleepUtilities.nap();
 
             db.releaseWriteLock();
+            System.out.println("Parei de Escrever " + Thread.currentThread().getName());
         }
     }
 }

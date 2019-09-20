@@ -1,5 +1,7 @@
+import java.util.concurrent.Semaphore;
+
 public class Database implements RWLock {
-    private int readerCounter;
+    private int readerCount;
     private Semaphore mutex;
     private Semaphore db;
 
@@ -9,29 +11,49 @@ public class Database implements RWLock {
         db = new Semaphore(1);
     }
 
-    public void acquireReadLock(){
-        mutex.acquire();
+    public void acquireReadLock() {
+        try{
+            mutex.acquire();
+        }catch(InterruptedException e) {
+            System.out.println(e);
+        }
         ++readerCount;
 
         if (readerCount == 1) {
-            db.acquire();
+            try{
+                db.acquire();
+            }catch(InterruptedException e) {
+                System.out.println(e);
+            }
         }
 
         mutex.release();
     }
     public void releaseReadLock(){
-        mutex.acquire();
+        try{
+            mutex.acquire();
+        }catch(InterruptedException e) {
+            System.out.println(e);
+        }
         --readerCount;
         
         if (readerCount == 1) {
-            db.acquire();
+            try{
+                db.acquire();
+            }catch(InterruptedException e) {
+                System.out.println(e);
+            }
         }
         
         mutex.release();
     }
     
     public void acquireWriteLock(){
-        db.acquire();
+        try{
+            db.acquire();
+        }catch(InterruptedException e) {
+            System.out.println(e);
+        }
     }
     public void releaseWriteLock(){
         db.release();
