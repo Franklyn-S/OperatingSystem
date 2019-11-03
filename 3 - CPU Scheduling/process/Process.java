@@ -23,7 +23,7 @@ public class Process extends Thread {
     }
 
     public long turnAround() {
-        return (endTime - startTime) / 10000000;
+        return (endTime - startTime);
     }
 
     public boolean getStarted() {

@@ -41,4 +41,7 @@ public class CircularQueue {
         return popProcess();
     }
 
+    public int size() {
+        return ready.size();
+    }
 }

@@ -19,20 +19,20 @@ public class FCFS {
         Simulator s4 = new Simulator(400, ready);
         Simulator s5 = new Simulator(500, ready);
 
-        s1.run();
-        s2.run();
-        s3.run();
-        s4.run();
-        s5.run();
+        s1.start();
+        s2.start();
+        s3.start();
+        s4.start();
+        s5.start();
 
         int counter = 0;
         int insideCounter = 0;
-        while (counter < 5) {
+        while (counter < ready.size()) {
             counter++;
             Process p = ready.modify(null);
             if (p != null) {
                 try {
-                    p.run();
+                    p.start();
                     insideCounter++;
                     System.out.println("Running QUANTUM " + quantum + " on " + insideCounter + " step");
 

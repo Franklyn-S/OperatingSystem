@@ -1,11 +1,12 @@
-monitor DiningPhilosophers {
-    enum State {THINKING, HUNGRY, EATING};
+monitor DiningPhilosophers{enum State {
+    THINKING, HUNGRY, EATING};
+
     State states = new State[5];
-    Condition[] self = new Condition[5];
-    public DiningPhilosophers {
-    for (int i = 0; i < 5; i++)
-        state[i] = THINKING;
-}
+    Condition[] self = new Condition[5];public DiningPhilosophers
+    {
+        for (int i = 0; i < 5; i++)
+            state[i] = THINKING;
+    }
 
     public void takeForks(int i) {
         state[i] = HUNGRY;
@@ -16,8 +17,8 @@ monitor DiningPhilosophers {
 
     public void returnForks(int i) {
         state[i] = State.THINKING;
-        test((i+4) % 5);
-        test((i+1) % 5);
+        test((i + 4) % 5);
+        test((i + 1) % 5);
     }
 
     private void test(int i) {
@@ -27,4 +28,3 @@ monitor DiningPhilosophers {
         }
     }
 }
-
